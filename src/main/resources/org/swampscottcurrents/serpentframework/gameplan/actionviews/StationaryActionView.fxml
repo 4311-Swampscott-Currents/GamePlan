@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="false" opacity="1.0" prefHeight="28.0" prefWidth="28.0" style="-fx-background-color:transparent;" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Pane prefHeight="-1.0" prefWidth="-1.0" translateX="-14.0" translateY="-14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Circle fill="DODGERBLUE" layoutX="14.0" layoutY="14.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="28.0" prefWidth="28.0" text="E" textAlignment="CENTER" />
+      </children>
+    </Pane>
+  </children>
+</AnchorPane>

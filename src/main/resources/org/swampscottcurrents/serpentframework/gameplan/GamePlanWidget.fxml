@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="viewingPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.swampscottcurrents.serpentframework.gameplan.GamePlanWidget">
+  <Pane fx:id="fieldPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="600.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+    <children>
+      <ImageView fx:id="fieldImage" fitHeight="311.69189453125" fitWidth="600.0" layoutX="0.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" x="0.0">
+        <image>
+          <Image url="@field.png" />
+        </image>
+      </ImageView>
+    </children>
+    <padding>
+      <Insets />
+    </padding>
+  </Pane>
+  <Pane prefHeight="250.0" prefWidth="600.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="352.0">
+    <children>
+      <ScrollPane fitToWidth="true" hbarPolicy="AS_NEEDED" layoutX="39.0" layoutY="0.0" prefHeight="200.00009999999747" prefWidth="494.0" vbarPolicy="ALWAYS">
+        <content>
+          <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
+            <children>
+              <VBox fx:id="robotActionListVBox" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            </children>
+          </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button id="moveActionUpArrow" fx:id="selectAboveActionButton" layoutX="0.0" layoutY="1.0" maxHeight="21.0" maxWidth="31.0" minHeight="21.0" minWidth="32.0" mnemonicParsing="false" onAction="#moveUpAction" prefHeight="21.0" prefWidth="31.0" style="-fx-font: 12px System" text="▲" />
+      <Button id="moveActionDownArrow" fx:id="selectBelowActionButton" layoutX="0.0" layoutY="22.0" maxHeight="21.0" maxWidth="32.0" minHeight="21.0" minWidth="32.0" mnemonicParsing="false" onAction="#moveDownAction" prefHeight="21.0" prefWidth="32.0" style="-fx-font: 12px System;" text="▼" />
+      <Button id="showActionButton" fx:id="showHideActionButton" ellipsisString="" layoutX="0.0" layoutY="50.0" maxHeight="64.0" maxWidth="79.0" minHeight="21.0" minWidth="32.0" mnemonicParsing="false" onAction="#showHideAction" prefHeight="22.08935546875" prefWidth="32.0" style="-fx-font: 12px System" text="" textOverrun="CLIP">
+        <graphic>
+          <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" style="-fx-font: 14px System" text="👁" textAlignment="CENTER" textOverrun="CLIP" translateX="1.0" />
+        </graphic>
+      </Button>
+      <Button fx:id="editActionButton" ellipsisString="" layoutX="0.0" layoutY="72.0" maxHeight="64.0" maxWidth="79.0" minHeight="21.0" minWidth="32.0" mnemonicParsing="false" onAction="#editAction" prefHeight="22.08935546875" prefWidth="32.0" style="-fx-font: 12px System" text="" textOverrun="CLIP">
+        <graphic>
+          <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" style="-fx-font: 14px System" text="🖉" textAlignment="CENTER" textOverrun="CLIP" translateX="1.0" />
+        </graphic>
+      </Button>
+      <Button fx:id="addActionButton" layoutX="0.0" layoutY="101.0" maxHeight="21.0" maxWidth="32.0" minHeight="21.0" minWidth="32.0" mnemonicParsing="false" onAction="#addAction" prefHeight="21.0" prefWidth="32.0" style="-fx-font: 12px System" text="+" />
+      <Button fx:id="removeActionButton" layoutX="0.0" layoutY="122.0" maxHeight="21.0" maxWidth="32.0" minHeight="21.0" minWidth="32.0" mnemonicParsing="false" onAction="#removeAction" prefHeight="21.0" prefWidth="32.0" style="-fx-font: 12px System" text="-" />
+      <Button id="saveGamePlanButton" layoutX="540.0" layoutY="1.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="32.0" mnemonicParsing="false" onAction="#saveGamePlan" prefHeight="21.0" prefWidth="60.0" style="-fx-font: 12px System" text="Save" />
+      <Button id="loadGamePlanButton" layoutX="540.0" layoutY="22.0" maxHeight="21.0" maxWidth="60.0" minHeight="21.0" minWidth="32.0" mnemonicParsing="false" onAction="#loadGamePlan" prefHeight="21.0" prefWidth="60.0" style="-fx-font: 12px System" text="Load" />
+      <ChoiceBox fx:id="allianceChoiceBox" layoutX="540.0" layoutY="52.0" prefWidth="60.0">
+        <items>
+          <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Red" />
+            <String fx:value="Blue" />
+          </FXCollections>
+        </items>
+      </ChoiceBox>
+    </children>
+  </Pane>
+</AnchorPane>
