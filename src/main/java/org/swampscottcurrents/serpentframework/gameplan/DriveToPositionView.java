@@ -13,14 +13,21 @@ import javafx.scene.robot.*;
 import javafx.scene.shape.*;
 import javafx.scene.transform.*;
 
+/** A graphical element which displays information about a DriveToPositionAction. */
 public class DriveToPositionView extends GameActionView {
     
+    /** The action that this view represents. */
     protected DriveToPosition viewData;
+    /** The Pane object that represents the position arrow, centered at the previous location and pointing towards the target position. */
     protected AnchorPane arrowPane;
+    /** The shaft of the arrow. */
     protected AnchorPane arrowShaft;
+    /** The triangular head of the arrow. */
     protected Polygon arrowHead;
+    /** Whether the user is currently dragging the arrow. */
     protected boolean isDragging = false;
 
+    /** Creates a new DriveToPositionView instance with the specified widget and action data. */
     public DriveToPositionView(GamePlanWidget w, DriveToPosition data) {
         super(w);
         viewData = data;
@@ -38,6 +45,7 @@ public class DriveToPositionView extends GameActionView {
         arrowHead = (Polygon)((AnchorPane)arrowShaft.getChildren().get(0)).getChildren().get(0);
     }
 
+    /** Updates this view with the most current information. This is called once every frame. */
     @Override
     public void update(GameActionView lastView) {
         if(widget.getSelectedAction() == viewData) {
@@ -62,31 +70,37 @@ public class DriveToPositionView extends GameActionView {
         arrowPane.setVisible(!isHidden());
     }
 
+    /** Gets the horizontal location, in pixels, of where the robot will be when it finishes this action. */
     @Override
     public double getEndPositionX() {
         return widget.fieldWidthToPixels(viewData.positionX);
     }
 
+    /** Gets the vertical location, in pixels, of where the robot will be when it finishes this action. */
     @Override
     public double getEndPositionY() {
         return widget.fieldHeightToPixels(viewData.positionY);
     }
 
+    /** Gets a horizontal position where the next GUI element may be rendered without overlapping this one. */
     @Override
     public double getDisplayPositionX() {
         return getEndPositionX();
     }
 
+    /** Gets a vertical position where the next GUI element may be rendered without overlapping this one. */
     @Override
     public double getDisplayPositionY() {
         return getEndPositionY() - 20;
     }
 
+    /** Destroys this view, causing it to remove the arrow from the GUI. */
     @Override
     public void destroy() {
         widget.getFieldPane().getChildren().remove(arrowPane);
     }
 
+    /** Called whenever the user clicks on this view. */
     protected void click(MouseEvent ev) {
         if(ev.isAltDown()) {
             widget.setSelectedAction(viewData);
@@ -101,16 +115,19 @@ public class DriveToPositionView extends GameActionView {
         ev.consume();
     }
 
+    /** Makes this view visible. */
     @Override
     public void show() {
         arrowPane.setVisible(true);
     }
 
+    /** Makes this view invisible. */
     @Override
     public void hide() {
         arrowPane.setVisible(false);
     }
 
+    /** This method is called when a user clicks the "edit" button. It allows them to change the speed and driving direction of the robot while it performs this action. */
     @Override
     public void edit() {
         ButtonType changeSpeed = new ButtonType("Edit speed");
@@ -145,6 +162,7 @@ public class DriveToPositionView extends GameActionView {
         }
     }
 
+    /** Sets the color of the GUI arrow. */
     protected void setArrowColor(String color) {
         arrowShaft.setStyle("-fx-background-color:" + color);
         arrowHead.setFill(Paint.valueOf(color));

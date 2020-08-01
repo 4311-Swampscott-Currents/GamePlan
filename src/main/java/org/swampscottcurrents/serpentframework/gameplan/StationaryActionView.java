@@ -10,15 +10,28 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 
+/** A graphical element which displays information about an action that takes place while the robot is stationary, represented as a colored dot above the robot's location. */
 public class StationaryActionView extends GameActionView {
-
+    /** The action that this view represents. */
     protected GameAction viewData;
+    /** The Pane object that reperesents the action dot. */
     protected AnchorPane mainPane;
+    /** The Circle that represents the dot itself. */
     protected Circle bubble;
+    /** The label used to render the emblem which should appear on the dot. */
     protected Label bubbleText;
+    /** The default color of the dot. */
     protected String defaultColor = "#1E90FF";
-    protected double lastX, lastY, lastDisplayX, lastDisplayY;
+    /** The horizontal position of the previously-rendered element. */
+    protected double lastX;
+    /** The vertical position of the previously-rendered element. */
+    protected double lastY;
+    /** The horizontal display position of the previously-rendered element. */
+    protected double lastDisplayX;
+    /** The vertical display position of the previously-rendered element. */
+    protected double lastDisplayY;
 
+    /** Creates a new StationaryActionView instance with the specified widget and action data. */
     public StationaryActionView(GamePlanWidget w, GameAction data) {
         super(w);
         viewData = data;
@@ -42,17 +55,20 @@ public class StationaryActionView extends GameActionView {
         widget.getFieldPane().getChildren().add(mainPane);
     }
 
+    /** Creates a new StationaryActionView instance with the specified widget, action data, and text. */
     public StationaryActionView(GamePlanWidget w, GameAction data, String text) {
         this(w, data);
         setText(text);
     }
 
+    /** Creates a new StationaryActionView instance with the specified widget, action data, text, and color. */
     public StationaryActionView(GamePlanWidget w, GameAction data, String text, String color) {
         this(w, data);
         setText(text);
         defaultColor = color;
     }
 
+    /** Updates this view with the most current information. This is called once every frame. */
     @Override
     public void update(GameActionView lastView) {
         mainPane.setVisible(true);
@@ -68,26 +84,31 @@ public class StationaryActionView extends GameActionView {
         lastY = lastView.getEndPositionY();
     }
 
+    /** Destroys this view, causing it to remove the arrow from the GUI. */
     @Override
     public void destroy() {
         widget.getFieldPane().getChildren().remove(mainPane);
     }
 
+    /** Gets a horizontal position where the next GUI element may be rendered without overlapping this one. */
     @Override
     public double getDisplayPositionX() {
         return lastDisplayX;
     }
 
+    /** Gets a vertical position where the next GUI element may be rendered without overlapping this one. */
     @Override
     public double getDisplayPositionY() {
         return lastDisplayY - 30;
     }
 
+    /** Gets the horizontal location, in pixels, of where the robot will be when it finishes this action. */
     @Override
     public double getEndPositionX() {
         return lastX;
     }
 
+    /** Gets the vertical location, in pixels, of where the robot will be when it finishes this action. */
     @Override
     public double getEndPositionY() {
         return lastY;
@@ -103,20 +124,24 @@ public class StationaryActionView extends GameActionView {
         ev.consume();
     }
 
+    /** Makes this view visible. */
     @Override
     public void show() {
         bubble.getParent().setVisible(true);
     }
 
+    /** Makes this view invisible. */
     @Override
     public void hide() {
         bubble.getParent().setVisible(false);
     }
 
+    /** Sets the text that is being display on the dot. */
     public void setText(String text) {
         bubbleText.setText(text);
     }
 
+    /** Gets the text that is being displayed on the dot. */
     public String getText() {
         return bubbleText.getText();
     }

@@ -22,13 +22,17 @@ import javafx.stage.*;
 import javafx.stage.FileChooser.*;
 import javafx.util.*;
 
+/** Represents a widget that allows for the selection and editing of GamePlans. */
 @Description(dataTypes = { NoneType.class }, name = "GamePlan")
 @ParametrizedController(value = "GamePlanWidget.fxml")
 public class GamePlanWidget extends SimpleAnnotatedWidget<NoneType> {
 
+    /** The width of an FRC field, in feet. */
     public static final double FIELD_WIDTH_FEET = 54.083;
+    /** The height of an FRC field, in feet. */
     public static final double FIELD_HEIGHT_FEET = 26.583;
 
+    /** A list of available action generators that the user can use to add to the current GamePlan. */
     public ArrayList<IGameActionGenerator> availableActions = new ArrayList<IGameActionGenerator>();
 
     private static GamePlan currentPlan;
@@ -48,6 +52,7 @@ public class GamePlanWidget extends SimpleAnnotatedWidget<NoneType> {
     @FXML
     private ChoiceBox<String> allianceChoiceBox;
 
+    /** Creates a new GamePlanWidget instance. */
     public GamePlanWidget() {
         availableActions.add(new IGameActionGenerator(){
             @Override
@@ -78,41 +83,49 @@ public class GamePlanWidget extends SimpleAnnotatedWidget<NoneType> {
         });
     }
 
+    /** Gets the JavaFX viewing pane associated with this widget. */
     @Override
     public Pane getView() {
         return viewingPane;
     }
 
+    /** Gets the JavaFX field pane, where GameActionViews should display. */
     public Pane getFieldPane() {
         return fieldPane;
     }
 
+    /** Converts a field width from pixels to feet. */
     public double fieldWidthToFeet(double pixels) {
         return FIELD_WIDTH_FEET * pixels / fieldPane.getWidth();
     }
 
+    /** Converts a field height from pixels to feet. */
     public double fieldHeightToFeet(double pixels) {
         return FIELD_HEIGHT_FEET * pixels / fieldPane.getHeight();
     }
 
+    /** Converts a field width from feet to pixels. */
     public double fieldWidthToPixels(double feet) {
         return feet * fieldPane.getWidth() / FIELD_WIDTH_FEET;
     }
 
+    /** Converts a field height from feet to pixels. */
     public double fieldHeightToPixels(double feet) {
         return feet * fieldPane.getHeight() / FIELD_HEIGHT_FEET;
     }
 
+    /** Sets the current GamePlan. */
     public void setCurrentPlan(GamePlan plan) {
         currentPlan = plan;
     }
 
+    /** Retrieves the current GamePlan. */
     public GamePlan getCurrentPlan() {
         return currentPlan;
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         setCurrentPlan(new GamePlan());
         fieldPane.setOnMouseClicked(ev -> onFieldPaneClick(ev));
         
@@ -130,27 +143,32 @@ public class GamePlanWidget extends SimpleAnnotatedWidget<NoneType> {
         timeline.play();
     }
 
+    /** Gets the GameAction that the user has currently selected. */
     public GameAction getSelectedAction() {
         return selectedAction;
     }
 
+    /** Sets the GameAction that the user has currently selected. */
     public void setSelectedAction(GameAction action) {
         selectedAction = action;
     }
 
+    /** Returns true if the robot is currently on the red alliance, or false if the robot is on blue. */
     public boolean isRedAlliance() {
         return isRed;
     }
 
+    /** Retrieves the current robot yaw rotation, in degrees, as reported by the robot gyroscope. */
     public double getRobotRotation() {
         return NetworkTableBinding.getRobotRotation();
     }
 
+    /** Displays an alert box to the user with the specified text. */
     public void showAlert(String text) {
         new Alert(AlertType.INFORMATION, text).show();
     }
 
-    protected void onFieldPaneClick(MouseEvent ev) {
+    private void onFieldPaneClick(MouseEvent ev) {
         if(getSelectedAction() == null) {
             getCurrentPlan().actions.add(new DriveToPosition(fieldWidthToFeet(ev.getX()), fieldHeightToFeet(ev.getY())));
         }

@@ -10,15 +10,23 @@ import javafx.scene.layout.*;
 import javafx.scene.robot.*;
 import javafx.scene.transform.Rotate;
 
+/** A graphical element which displays information about a RobotPosition. */
 public class RobotPositionView extends GameActionView {
 
+    /** The length of the robot in feet. */
     public static final double ROBOT_LENGTH_FEET = 2.692;
+    /** The width of the robot in feet. */
     public static final double ROBOT_GIRTH_FEET = 2.25;
-
+    /** The action that this view represents. */
     protected RobotPosition viewData;
+    /** The Pane object that represents the robot. */
     protected AnchorPane robotPane;
-    protected AnchorPane verticalRobotPositionBar, horizontalRobotPositionBar;
+    /** The Pane object that represents the vertical position bar. */
+    protected AnchorPane verticalRobotPositionBar;
+    /** The Pane object that represents the horizontal position bar. */
+    protected AnchorPane horizontalRobotPositionBar;
 
+    /** Creates a new RobotPositionView instance with the specified widget and action data. */
     public RobotPositionView(GamePlanWidget widget, RobotPosition data) {
         super(widget);
         viewData = data;
@@ -57,6 +65,7 @@ public class RobotPositionView extends GameActionView {
         event.consume();
     }
 
+    /** Updates this view with the most current information. This is called once every frame. */
     @Override
     public void update(GameActionView lastView) {
         robotPane.toFront();
@@ -113,6 +122,7 @@ public class RobotPositionView extends GameActionView {
         return closestPoint;
     }
 
+    /** Destroys this view, causing it to remove the arrow from the GUI. */
     @Override
     public void destroy() {
         widget.getFieldPane().getChildren().remove(robotPane);
@@ -120,21 +130,25 @@ public class RobotPositionView extends GameActionView {
         widget.getFieldPane().getChildren().remove(horizontalRobotPositionBar);
     }
 
+    /** Gets the horizontal location, in pixels, of where the robot will be when it finishes this action. */
     @Override
     public double getEndPositionX() {
         return widget.fieldWidthToPixels(viewData.positionX);
     }
 
+    /** Gets the vertical location, in pixels, of where the robot will be when it finishes this action. */
     @Override
     public double getEndPositionY() {
         return widget.fieldHeightToPixels(viewData.positionY);
     }
 
+    /** Gets a horizontal position where the next GUI element may be rendered without overlapping this one. */
     @Override
     public double getDisplayPositionX() {
         return getEndPositionX();
     }
 
+    /** Gets a vertical position where the next GUI element may be rendered without overlapping this one. */
     @Override
     public double getDisplayPositionY() {
         return getEndPositionY() - robotPane.getHeight() - 5;

@@ -11,6 +11,7 @@ import edu.wpi.first.shuffleboard.api.widget.WidgetType;
 
 @Description(group = "4311 Swampscott Currents", name = "GamePlan", summary = "Facilitates the creation of custom autonomous robot routines at runtime.", version = "2.0.0")
 public class App extends Plugin {
+	/** Returns a list of all the widgets contained in this plugin. */
 	@Override
 	@SuppressWarnings("rawtypes")
 	public List<ComponentType> getComponents() {
