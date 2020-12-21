@@ -38,6 +38,8 @@ public class RobotPositionView extends GameActionView {
             robotPane = FXMLLoader.load(widget.getClass().getResource("actionviews/RobotPositionView.fxml"));
             robotPane.setPrefWidth(widget.fieldWidthToPixels(ROBOT_LENGTH_FEET));
             robotPane.setPrefHeight(widget.fieldHeightToPixels(ROBOT_GIRTH_FEET));
+            robotPane.setMinWidth(robotPane.getPrefWidth());
+            robotPane.setMinHeight(robotPane.getPrefHeight());
             robotPane.setOnMouseClicked(ev -> click(ev));
             widget.getFieldPane().getChildren().add(robotPane);
 
